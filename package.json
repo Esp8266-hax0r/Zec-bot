@@ -31,6 +31,7 @@
     "discord.js-musicbot-addon": "13.7.0",
     "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "4.0.0",
-    "opusscript": "0.0.6"
+    "opusscript": "0.0.6",
+    "node-opus": "0.3.2"
   }
 }
