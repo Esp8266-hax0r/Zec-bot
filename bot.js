@@ -50,7 +50,7 @@ var statusesToCycle = [`z!help`, `self-coding`, `Fortnite`, `Minecraft`, `ROBLOX
 const Music = require('discord.js-musicbot-addon');
 const music = Music.start(bot, {
   botPrefix: "z!",
-  youtubeKey: 'AIzaSyBoVMtRVfK3xK-c9hO_x2DpRpw3F6WvrTc',
+  youtubeKey: process.env.YT_KEY,
   anyoneCanSkip: true
 });
 bot.on("guildCreate", guild => {
