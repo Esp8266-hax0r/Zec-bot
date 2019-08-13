@@ -32,6 +32,9 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "4.0.0",
     "opusscript": "0.0.6",
-    "node-opus": "0.3.2"
+    "node-opus": "0.3.2",
+    "ytdl-core": "0.29.5",
+    "ytpl": "0.1.15",
+    "ytsearcher": "1.2.2"
   }
 }
