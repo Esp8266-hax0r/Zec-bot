@@ -24,7 +24,7 @@ var request = require("request");
 const randomWord = require("random-words")
 const request1 = require("node-superfetch");
 const bot = new Discord.Client();
-const TOKEN = "NDcwMjExNDk0NjM5MDQyNTkw.DvgFPQ.2PY11EnGrwoBqzcFOKhLoWbh7k4";
+const TOKEN = "";
 var hack = 0;
 let user;
 let aat = 1;
