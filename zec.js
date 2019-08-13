@@ -2428,7 +2428,7 @@ antispam(bot, {
   }, 15000);
 	 
 });
-bot.login(TOKEN)
+bot.login(process.env.BOT_TOKEN)
 
 function GetUptime(){
 
