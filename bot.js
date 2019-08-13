@@ -49,7 +49,7 @@ var servers = [];
 var statusesToCycle = [`z!help`, `self-coding`, `Fortnite`, `Minecraft`, `ROBLOX`, `Rocket League`, `Apex Legends`, `rebooting`, `saving data`, `testing commands...`];  
 const Music = require('discord.js-musicbot-addon');
 const music = Music.start(bot, {
-  prefix: "z!",
+  botPrefix: "z!",
   youtubeKey: 'AIzaSyBoVMtRVfK3xK-c9hO_x2DpRpw3F6WvrTc',
   anyoneCanSkip: true
 });
