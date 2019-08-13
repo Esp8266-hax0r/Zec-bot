@@ -48,7 +48,7 @@ var interval = "5s";
 var servers = [];
 var statusesToCycle = [`z!help`, `self-coding`, `Fortnite`, `Minecraft`, `ROBLOX`, `Rocket League`, `Apex Legends`, `rebooting`, `saving data`, `testing commands...`];  
 const Music = require('discord.js-music-v11');
-music(bot, {prefix: "z!"});
+Music(bot, {prefix: "z!"});
 bot.on("guildCreate", guild => {
     console.log(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
 	if(changeStatus==1){
