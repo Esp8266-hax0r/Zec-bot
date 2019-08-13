@@ -48,8 +48,10 @@ var interval = "5s";
 var servers = [];
 var statusesToCycle = [`z!help`, `self-coding`, `Fortnite`, `Minecraft`, `ROBLOX`, `Rocket League`, `Apex Legends`, `rebooting`, `saving data`, `testing commands...`];  
 const Music = require('discord.js-musicbot-addon');
-const music = new Music(bot, {
-  youtubeKey: 'AIzaSyBoVMtRVfK3xK-c9hO_x2DpRpw3F6WvrTc'
+const music = Music.start(bot, {
+  prefix: "z!",
+  youtubeKey: 'AIzaSyBoVMtRVfK3xK-c9hO_x2DpRpw3F6WvrTc',
+  anyoneCanSkip: true
 });
 bot.on("guildCreate", guild => {
     console.log(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
