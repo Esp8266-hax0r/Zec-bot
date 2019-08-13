@@ -17,7 +17,7 @@
     "random-puppy": "1.1.0",
     "bluebird": "3.5.5",
     "fs": "0.0.1-security",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "moment": "2.24.0",
     "array-sort": "1.0.0",
     "profanities": "2.11.0",
