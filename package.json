@@ -28,6 +28,7 @@
     "random-words": "1.1.0",
     "node-superfetch": "0.1.9",
     "discord.js-musicbot-addon-v2": "1.10.4",
+    "discord.js-musicbot-addon": "13.7.0",
     "ffmpeg": "0.0.4",
     "opusscript": "0.0.6"
   }
