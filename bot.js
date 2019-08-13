@@ -49,7 +49,8 @@ var servers = [];
 var statusesToCycle = [`z!help`, `self-coding`, `Fortnite`, `Minecraft`, `ROBLOX`, `Rocket League`, `Apex Legends`, `rebooting`, `saving data`, `testing commands...`];  
 const Music = require('discord.js-musicbot-addon-v2');
 const music = new Music(bot, {
-  djRole: "",
+  prefix: 'z!',
+  djRole: '',
   youtubeKey: 'AIzaSyBoVMtRVfK3xK-c9hO_x2DpRpw3F6WvrTc'
 });
 bot.on("guildCreate", guild => {
