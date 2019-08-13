@@ -26,6 +26,7 @@
     "ascii-art": "1.5.1",
     "random-case": "1.0.0",
     "random-words": "1.1.0",
-    "node-superfetch": "0.1.9"
+    "node-superfetch": "0.1.9",
+    "discord.js-musicbot-addon-v2": "1.10.4"
   }
 }
