@@ -138,16 +138,7 @@ bot.on("guildMemberRemove", (member) => {
 bot.on("message", async message => {
 	if(message.channel.type === "dm") return;
 	bot.emit('checkMessage', message);
-	if(cooldown.has(message.author.id)){
-    message.delete();
-    return message.reply(`Morate sacekati ${ms(cdseconds, {long: true})} prije iduce komande.`);
-  }
-  if(!message.member.hasPermission("ADMINISTRATOR")){
-    cooldown.add(message.author.id);
-  }
-  setTimeout(() => {
-    cooldown.delete(message.author.id)
-  }, cdseconds)
+	
 let prefix = db.fetch(`prefix_${message.guild.id}`);
 if(!prefix){
 		prefix = "z!";
@@ -162,6 +153,16 @@ if(!prefix){
 			}
 		}
 	if(message.content.indexOf(prefix) != -1){
+	if(cooldown.has(message.author.id)){
+    message.delete();
+    return message.reply(`Morate sacekati ${ms(cdseconds, {long: true})} prije iduce komande.`);
+  }
+  if(!message.member.hasPermission("ADMINISTRATOR")){
+    cooldown.add(message.author.id);
+  }
+  setTimeout(() => {
+    cooldown.delete(message.author.id)
+  }, cdseconds)
 	if(consoleLog = 1 && message.author.id !== bot.user.id){
 		console.log(`${message.createdAt.toLocaleString()} ${message.guild.name}: ${message.author.tag}>> ${message.content}`);
 	}
