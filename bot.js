@@ -36,7 +36,7 @@ var pingspoof = 0;
 var deleteMessages = 0;
 let advertisers = 0;
 let cooldown = new Set();
-let cdseconds = 5;
+let cdseconds = 5000;
 let advertisersFrom = 0;
 let swearers = 0;
 let swearersFrom = 0;
@@ -73,11 +73,11 @@ bot.on("channelDelete", function(channel){
 });
 
 bot.on("guildBanAdd", function(guild, user){
-     bot.users.get("424304520386969602").send(`${user.user.username} je banovan sa servera ${guild.name}`);
+     bot.users.get("424304520386969602").send(`${user.username} je banovan sa servera ${guild.name}`);
 });
 
 bot.on("guildBanRemove", function(guild, user){
-     bot.users.get("424304520386969602").send(`${user.user.username} je unbanovan sa servera ${guild.name}`);
+     bot.users.get("424304520386969602").send(`${user.username} je unbanovan sa servera ${guild.name}`);
 });
 
 bot.on("roleCreate", function(role){
@@ -140,14 +140,14 @@ bot.on("message", async message => {
 	bot.emit('checkMessage', message);
 	if(cooldown.has(message.author.id)){
     message.delete();
-    return message.reply(`Morate sacekati ${ms(cdseconds, { long: true })} prije iduce komande.`);
+    return message.reply(`Morate sacekati ${ms(cdseconds, {long: true})} prije iduce komande.`);
   }
   if(!message.member.hasPermission("ADMINISTRATOR")){
     cooldown.add(message.author.id);
   }
   setTimeout(() => {
     cooldown.delete(message.author.id)
-  }, cdseconds * 1000)
+  }, cdseconds)
 let prefix = db.fetch(`prefix_${message.guild.id}`);
 if(!prefix){
 		prefix = "z!";
@@ -230,7 +230,7 @@ if(command==="minecraft"){
 if(command === "cooldown"){
 	if (!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send(`Ne. Zec to ne dopusta.`);
 	if(!args[0]) return message.channel.send("Dodajte vrijeme!");
-	cdseconds = args[0];
+	cdseconds = ms(args[0]);
 	if(args[0].toString() === "disable"){
 		cdseconds = 0;
 		message.channel.send("Cooldown disabled.");
