@@ -2610,3 +2610,7 @@ function reboot(){
  bot.destroy();
  bot.login(process.env.BOT_TOKEN);
 }
+
+function shorten(text, maxLen = 2000) {
+	return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
+}
