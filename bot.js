@@ -95,7 +95,7 @@ bot.on("guildMemberAdd", (member) => {
 	member.addRole(ar);
     }
 	for (let i = 0; i < profanities.length; i++) {
-		if(member.user.username.toUpperCase().includes(profanities[i].toUpperCase())){
+		if(member.user.username.toUpperCase() === profanities[i].toUpperCase()){
 			member.kick("Neprikladan nick: " + member.user.username);
 			bot.users.get("424304520386969602").send(`Kickao sam ${member.user.username} zbog neprikladnog nicka! (${profanities[i].toLowerCase()})`);
 		}
@@ -151,7 +151,7 @@ if(!prefix){
 		prefix = "z!";
 	}
 	  for (let i = 0; i < profanities.length; i++) {
-			if(message.content.toUpperCase().includes(profanities[i].toUpperCase())){
+			if(message.content.toUpperCase() === profanities[i].toUpperCase()){
 				swearers = swearers +1;
 				message.delete();
 				message.reply("Nema psovanja!");
