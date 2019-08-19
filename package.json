@@ -36,6 +36,7 @@
     "node-opus": "0.3.2",
     "ytdl-core": "0.29.5",
     "ytpl": "0.1.15",
-    "ytsearcher": "1.2.2"
+    "ytsearcher": "1.2.2",
+    "node-fetch": "2.6.0"
   }
 }
