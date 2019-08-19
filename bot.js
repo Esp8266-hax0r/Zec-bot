@@ -230,7 +230,7 @@ if(command === "readqr"){
 try {
 			const { body } = await request1
 				.get('https://api.qrserver.com/v1/read-qr-code/')
-				.query({ fileurl: image });
+				.query(message.attachment.url);
 			const data = body[0].symbol[0];
 			if (!data.data) return message.channel.send(`Ne mogu procitati QR code: ${data.error}.`);
 			return message.channel.send(shorten(data.data, 2000 - (msg.author.toString().length + 2)));
