@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const wait = require('util').promisify(setTimeout);
+const fetch = require('node-fetch')
 const weather = require("weather-js");
 const superagent = require("superagent");
 const db = require("quick.db");
@@ -93,6 +94,11 @@ bot.on("guildMemberAdd", (member) => {
 	if(ar){
 	member.addRole(ar);
     }
+	for (let i = 0; i < profanities.length; i++) {
+		if(member.user.username.toUpperCase().indexOf(profanities[i].toUpperCase()) !=-1){
+			member.kick("Neprikladan nick: " + member.user.username);
+		}
+	}
 	i = db.fetch(`messageChannel_${member.guild.id}`);
 
             
@@ -144,7 +150,7 @@ if(!prefix){
 		prefix = "z!";
 	}
 	  for (let i = 0; i < profanities.length; i++) {
-			if(message.content.toUpperCase() === profanities[i].toUpperCase()){
+			if(message.content.toUpperCase().indexOf(profanities[i].toUpperCase()) !=-1){
 				swearers = swearers +1;
 				message.delete();
 				message.reply("Nema psovanja!");
@@ -239,7 +245,92 @@ if(command === "cooldown"){
 	}
 	message.channel.send(`Postavljen cooldown na ${ms(ms(cdseconds),{long: true})}`);
 }
+	
+if(command === "createqr"){
+	if(args.length < 1) return message.reply("Dodajte tekst!");
+	var user_text = text.split(" ").join("%20")
 
+            var qr_generator = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${user_text}`;
+            message.channel.send(qr_generator);
+}
+	
+if(command === "earth"){
+message.channel.send("Pinging NASA for Earth live footage...");
+	var earth_link = "https://api.nasa.gov/EPIC/api/natural/images?api_key=DEMO_KEY"
+
+        fetch(earth_link)
+            .then(res => res.json())
+            .then((out) => {
+                var earth_output = out;
+
+                var randomNumber = getRandomNumber(0, earth_output.length - 1)
+                var image_name = earth_output[randomNumber].image
+
+                var date = earth_output[randomNumber].date;
+                var date_split = date.split("-")
+
+                var year = date_split[0];
+
+                var month = date_split[1];
+
+                var day_and_time = date_split[2];
+                var sliced_date = day_and_time.slice(0, 2);
+
+                var image_link = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${sliced_date}/png/` + image_name + ".png"
+                message.channel.send(image_link)
+                message.channel.send(`${earth_output[randomNumber].caption} na datum ${date}`)
+            })
+			.catch(err => { throw err });
+}
+
+if(command === "iss"){
+var iss_link = "http://api.open-notify.org/iss-now.json"
+        fetch(iss_link)
+            .then(res => res.json())
+            .then((out) => {
+                var iss_info = out;
+                var position = iss_info["iss_position"];
+                var latitude = position["latitude"];
+                var longitude = position["longitude"];
+
+                var iss_output = `Latitude: ${latitude}\nLongitude: ${longitude}`
+
+                var colour_array = ["1211996", "3447003", "13089792", "16711858", "1088163", "16098851", "6150962"]
+                var randomNumber = getRandomNumber(0, colour_array.length - 1);
+                var randomColour = colour_array[randomNumber];
+            
+                message.channel.send({
+                    embed: {
+                        color: randomColour,
+                        title: "Lokacija ISS-a 🌌🌠🌃",
+                        description: iss_output
+                    }
+                });
+            })
+            .catch(err => { throw err });
+}	
+	
+	
+if(command === "astronauts"){
+ var astro_link = "http://api.open-notify.org/astros.json";
+	fetch(astro_link)
+            .then(res => res.json())
+            .then((out) => {
+                var astro_list = out;
+                var number_astronauts = astro_list["number"];
+
+                var astro_output = `Sada je ${number_astronauts} astronauta na ISS-u.`
+
+                msg.channel.send( {
+                    embed: {
+                        color: 1211996,
+                        title: "Broj astronauta u svemiru",
+                        description: astro_output
+                    }
+                });
+            })
+            .catch(err => { throw err });
+}
 if(command === "shutdown"){
 	if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
 	await message.channel.send("Shutting down...");
@@ -2406,8 +2497,8 @@ bot.on("ready", () => {
     });
   });
 antispam(bot, {
-  warnBuffer: 3,
-  maxBuffer: 5,
+  warnBuffer: 5,
+  maxBuffer: 7,
   interval: 2000, 
   warningMessage: "prestanite spamovati! Biti cete banovani.",
   banMessage: "je banovan sa servera. Razlog: Spamovanje",
@@ -2444,7 +2535,7 @@ function GetUptime(){
 }
 
 function getRandomNumber(min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function generateRandomAlphaNum(len) {
     var rdmString = "";
