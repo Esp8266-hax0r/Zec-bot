@@ -227,10 +227,11 @@ let symbol = db.fetch(`symbol_${message.guild.id}`);
 }
 	
 if(command === "readqr"){
+	var imgUrl = (message.attachments).array();
 try {
 			const { body } = await request1
 				.get('https://api.qrserver.com/v1/read-qr-code/')
-				.query(message.attachment.url);
+				.query(imgUrl[0].url);
 			const data = body[0].symbol[0];
 			if (!data.data) return message.channel.send(`Ne mogu procitati QR code: ${data.error}.`);
 			return message.channel.send(shorten(data.data, 2000 - (msg.author.toString().length + 2)));
