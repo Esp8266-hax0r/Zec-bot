@@ -261,7 +261,7 @@ if(command === "cooldown"){
 }
 	
 if(command === "createqr"){
-	var text = args.join(" ");
+	var text = args.join(" ").replace(/ /g,"%20");
 	if(!args[0]) return message.reply("Dodajte tekst!");
 
             var qr_generator = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${text}`;
