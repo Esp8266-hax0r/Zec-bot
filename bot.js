@@ -248,11 +248,10 @@ if(command === "cooldown"){
 }
 	
 if(command === "createqr"){
-	var text = args;
-	if(args.length < 1) return message.reply("Dodajte tekst!");
-	var user_text = text.split(" ").join("%20")
+	var text = args.join(" ");
+	if(!args[0]) return message.reply("Dodajte tekst!");
 
-            var qr_generator = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${user_text}`;
+            var qr_generator = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${text}`;
             message.channel.send(qr_generator);
 }
 	
