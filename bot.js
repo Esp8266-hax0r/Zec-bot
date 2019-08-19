@@ -247,6 +247,7 @@ if(command === "cooldown"){
 }
 	
 if(command === "createqr"){
+	var text = args;
 	if(args.length < 1) return message.reply("Dodajte tekst!");
 	var user_text = text.split(" ").join("%20")
 
@@ -321,7 +322,7 @@ if(command === "astronauts"){
 
                 var astro_output = `Sada je ${number_astronauts} astronauta na ISS-u.`
 
-                msg.channel.send( {
+                message.channel.send( {
                     embed: {
                         color: 1211996,
                         title: "Broj astronauta u svemiru",
