@@ -228,14 +228,14 @@ let symbol = db.fetch(`symbol_${message.guild.id}`);
 	
 if(command === "readqr"){
 try {
-			const { body } = await request
+			const { body } = await request1
 				.get('https://api.qrserver.com/v1/read-qr-code/')
 				.query({ fileurl: image });
 			const data = body[0].symbol[0];
-			if (!data.data) return msg.reply(`Ne mogu procitati QR code: ${data.error}.`);
-			return msg.reply(shorten(data.data, 2000 - (msg.author.toString().length + 2)));
+			if (!data.data) return message.channel.send(`Ne mogu procitati QR code: ${data.error}.`);
+			return message.channel.send(shorten(data.data, 2000 - (msg.author.toString().length + 2)));
 		} catch (err) {
-			return msg.reply(`Oh no, an error occurred: \`${err.message}\`.`);
+			return message.channel.send(`Oh no, an error occurred: \`${err.message}\`.`);
 		}
 }
 
