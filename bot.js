@@ -2031,8 +2031,8 @@ if(command === "bible"){
 }
 	
 if(command === "bitcoin"){
-let{body} = await superagent.get(`https://api.coindesk.com/v1/bpi/currentprice/BTC.json`);
-message.channel.send(`Bitcoin price: ${body.bpi.USD.rate} USD\nLast updated on: ${body.time.updated}`);
+let{body} = await superagent.get(`https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=HRK`);
+message.channel.send(`Bitcoin price: ${body.price_hrk} kn\nLast updated on: ${new Date(body.last_updated)}`);
 
 }
 	
