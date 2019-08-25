@@ -2029,6 +2029,13 @@ if(command === "bible"){
 
 
 }
+	
+if(command === "bitcoin"){
+let{body} = await superagent.get(`https://api.coindesk.com/v1/bpi/currentprice/BTC.json`);
+message.channel.send(`Bitcoin price: ${body.bpi.USD.rate} USD\nLast updated on: ${body.time.updated}`);
+
+}
+	
 if(command === "memegen"){
 
 	if(!args[0]) return message.reply("Dodajte template! Sve template-ove mozete naci na stranici: https://memegen.link/api/templates/");
