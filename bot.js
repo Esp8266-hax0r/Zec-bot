@@ -2032,8 +2032,7 @@ if(command === "bible"){
 	
 if(command === "bitcoin"){
 let{body} = await superagent.get(`https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=HRK`);
-console.log(body);
-message.channel.send(`Bitcoin price: ${body[0].price_hrk} kn\nLast updated on: ${new Date(body[0].last_updated)}`);
+message.channel.send(`Bitcoin price: ${body[0].price_hrk} kn\nPromjena u 1h: ${body[0].percent_change_1h}%\nPromjena u 24h: ${body[0].percent_change_24h}%\nPromjena u 7 dana: ${body[0].percent_change_7d}%`);
 
 }
 	
