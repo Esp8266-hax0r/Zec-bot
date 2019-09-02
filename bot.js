@@ -177,7 +177,7 @@ if(!prefix){
 	message.delete();
 	}
 }
-if(message.content.indexOf("discord.gg/") !=-1 || message.content.indexOf("aternos.me") !=-1 || checkMsg(message.content, ".")){
+if((message.content.indexOf("discord.gg/") !=-1 || message.content.indexOf("aternos.me") !=-1 || checkMsg(message.content, ".")) && message.author.id !== bot.user.id){
 	if(!message.member.hasPermission('MANAGE_MESSAGES')){
 	advertisers = advertisers+1;
 	message.delete();
@@ -1777,24 +1777,6 @@ if(command === "forcetempmute"){
 
 
 }
-if(command === "crkni"){
-
-	 message.channel.send('Attempting to crash... ').then((msg) => {
-			 setTimeout(function(){
-
-msg.edit(`Attempting to crash... Done!`);
-bot.user.setStatus("invisible");
-const embed = new Discord.RichEmbed()
-
-	.setAuthor("Žec - Crash report", bot.user.displayAvatarURL)
-  .setColor("#7289DA")
-  .addField("Razlog: ", `Crashed by: ${message.author.username}`)
-  .setFooter("Crash report - END");
-  message.channel.send(embed);
-  message.channel.send("Sending to owner...");
-  message.channel.send("This might be a bug...");
-}, 2000)
-
 
 })}
 if(command === "resetnick"){
@@ -1999,7 +1981,7 @@ let snekImage = sneks[urlIndex];
   .setColor("#7289DA")
   .setTitle(":snake:")
   .setImage(snekImage);
-  message.channel.send(snekembed);
+  message.channel.send(žembed);
 
 
 }
@@ -2167,26 +2149,7 @@ if(command === "status") {
    .addField("Bot kreiran",bot.user.createdAt.toLocaleString(),true)
    message.channel.send(serverembed);
 }
-if(command === "pvp") {
 
-	let user1 = args[0];
-	let user2 = args[1];
-	let help = args[2];
-
-	if(!user2) return message.channel.send("S kime se zelis tuci!");
-	if(help === "help") return message.channel.send("Upotreba: `z!pvp @user1 @user2`");
-
-	let results = [`${user1} got a combo on ${user2} and now ${user2} is down on 3HP but ${user2} managed to escape!`, `${user1} got a combo and killed ${user2}`, `${user2} got a combo and killed ${user1}`, `${user2} got a combo on ${user1} and now ${user1} is down on 6HP but ${user1} managed to escape!`];
-
-	let result = Math.floor((Math.random() * results.length));
-
-	let pvpEmbed = new Discord.RichEmbed()
-	.setDescription("**PvP u tijeku**")
-	.setColor("#FF0000")
-	.addField(`${user1} ? ${user2}`, results[result]);
-
-	message.channel.send(pvpEmbed);
-}
 });
 
 bot.on("message", function(message){
@@ -2425,34 +2388,34 @@ message.channel.send({ embed });
 		.addField("z!say [text]", "Reci Zecu sto da kaze! Zakon!!!")
 		.addField("z!date", "Trenutni datum i vrijeme")
 		.addField("z!dice", "Uzmi Zeca za covjece ne ljuti se!")
-		.addField("z!setgame [game]", "Sto ce Zec danas igrati?")
-		.addField("z!setwatch [film?]", "Sto ce Zec danas gledati?")
-		.addField("z!setstatus [status]", "Hoce li Zec biti aktivan? Hm...")
 		.addField("z!randomcase [text]", "Neka se Zec poigra sa tvojom rijeci")
 		.addField("z!uptime", "Koliko Zec pazi na tvoj server?")
 		.addField("z!yesno [pitanje]", "Zec odgovara sa da ili ne")
 		.addField("z!poll [pitanje]", "Zec stvara ankete (vase, tako da nisu dosadne) :)")
 		.addField("z!ascii [text]", "Zec ce tvoju poruku pretvoriti u umjetnost")
-		.addField("z!pvp [user1] [user2]", "Zec ce potuci dva zadana korisnika.")
 		.addField("z!chucknorris", "Neka ti Zec posalje nasumicnu cinjenicu Chuck Norrisa")
 		.addField("z!coinflip", "Pismo ili glava pitanje je sada")
 		.addField("z!fact", "Produbi znanje nasumicnom cinjenicom")
 		.addField("z!8ball [pitanje]", "Zec prorice buducnost (nemojte nikome reci)")
 		.addField("z!doggo", "Zec obozava pse :dog:")
 		.addField("z!ping", "Zecov ping")
+		.addField("z!pingspoof", "I'm a ping spoofer!")
 		.addField("z!meme", "Neka ti Zec posalje najnovije memeove")
 		.addField("z!info", "Informacije o serveru")
+		.addField("z!dmall", "DM all members!")
+		.addField("z!earth", "Ping NASA for live footage of Earth!")
+		.addField("z!iss", "Lokacija ISS-a")
+		.addField("z!astronauts", "Broj astronauta na ISS-u")
 		.addField("z!cat", "Zec obozava macke :cat:")
 		.addField("z!vrijeme [lokacija]", "Zec je i meteorolog?")
-		.setFooter("Help, Strana 1/2")
+		.setFooter("Help, Strana 1/2, (neobavezno), [obavezno]")
 		const helpEmbed2 = new Discord.RichEmbed()
 		.setColor(0x954D23)
 		.addField("z!status", "Status Žec bota")
 		.addField("z!kill [user]", "Bolje da ne pricam...")
 		.addField("z!report [user] [reason]", "Prijavi krsitelje pravila na serveru.")
-		.addField("z!hack", "Ups...")
 		.addField("z!embed [poruka]", "Pretvori poruku u malo vise umjetnicki nacin")
-		.addField("z!spam [brojPoruka]", "Spam, spam1, spam2, spam3...")
+		.addField("z!spam (poruka) [brojPoruka]", "Spam, spam1, spam2, spam3...")
 		.addField("z!spoiler [message]", "⬛⬛⬛⬛⬛⬛")
 		.addField("z!invites", "Top invites")
 		.addField("z!lockdown [time]", "Zakljuc!")
@@ -2461,13 +2424,19 @@ message.channel.send({ embed });
 		.addField("z!onlinemembers", "Tko je sve online? Tko se nije skrio upisan je bio :wink:")
 		.addField("z!smalltext [text]", "Ne moram ni objasnjavati...")
 		.addField("z!captcha", "Vas captcha! Nadam se da cete ga uspjeti rijesiti!")
-		.addField("z!consoletoggle", "Hoce li Zec zapisivati potrebne informacije u konzolu?")
-		.addField("z!deletetoggle", "Hoce li Zec automatski obrisati poruku?")
-		.addField("z!math (izraz)", "Ovo je super korisno za hitne situacije!")
-		.addField("z!advancedmath (operacija) (izraz)", "Zec je naucio i malo slozeniju matematiku.")
-		.addField("z!clearconsole", "Obrisi konzolu!")
-		.addField("z!setinterval", "Nakon koliko vremena ce Zec obrisati poruku.")
-		.setFooter("Help, Strana 2/2")
+		.addField("z!math [izraz]", "Ovo je super korisno za hitne situacije!")
+		.addField("z!advancedmath [operacija] [izraz]", "Zec je naucio i malo slozeniju matematiku.")
+		.addField("z!birb", "Pticica!")
+		.addField("z!withrole [role]", "Svi sa zadanom ulogom")
+		.addField("z!rar [@user]", "Remove all roles from an user.")
+		.addField("z!ducc", "Random duck!")
+		.addField("z!bitcoin", "Informacije o Bitcoinu")
+		.addField("z!bible [knjiga (John)] [poglavlje:red]", "Biblija!")
+		.addField("z!snek", "Zmija! :snake:")
+		.addField("z!shorten [url]", "Skracivanje URL-a! Zakon!")
+		.addField("z!advice", "Savjet sa svakidasnji zivot!")
+		.addField("z!setnick (@user)", "Postavi nadimak!")
+		.setFooter("Help, Strana 2/2, (neobavezno), [obavezno]")
 		if(!args[0]){
 
 		message.channel.send({embed})
