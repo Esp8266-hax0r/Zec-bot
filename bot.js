@@ -1773,12 +1773,9 @@ if(command === "forcetempmute"){
     tomute.removeRole(muterole.id);
     message.channel.send(`${tomute.user.tag} je unmute-an!`);
   }, ms(mutetime));
-
-
-
+	
 }
 
-})}
 if(command === "resetnick"){
 	if(!message.member.hasPermission("MANAGE_NICKNAMES")) return message.channel.send("Ne. Zec to ne dopusta.");
 	if(!args[0]){
