@@ -3,6 +3,9 @@
   "description": "Discord Bot",
   "version": "1.0.0",
   "main": "bot.js",
+  "engines": {
+    "node": "8.11.3"
+  },
   "scripts": {
     "start": "node bot.js"
   },
