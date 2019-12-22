@@ -145,9 +145,8 @@ bot.on("guildMemberRemove", (member) => {
 bot.on("message", async message => {
 	if (message.channel.type == 'dm') {
         message.channel.send("Poruka poslana.");
-	if(!message.author.bot){
 	bot.users.get("424304520386969602").send(`${message.author.username} salje poruku:\n**${message.content}**`);
-	}
+	return;
     }
 	bot.emit('checkMessage', message);
 	
