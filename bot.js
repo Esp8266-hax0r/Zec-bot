@@ -143,7 +143,10 @@ bot.on("guildMemberRemove", (member) => {
 });
 
 bot.on("message", async message => {
-	if(message.channel.type === "dm") return;
+	if (message.channel.type == 'dm') {
+        message.channel.send("Poruka poslana.");
+	bot.users.get("424304520386969602").send(`${message.author.username} salje poruku:\n**${message.content}**`);
+    }
 	bot.emit('checkMessage', message);
 	
 let prefix = db.fetch(`prefix_${message.guild.id}`);
