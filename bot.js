@@ -27,6 +27,7 @@ const request1 = require("node-superfetch");
 const bot = new Discord.Client();
 const TOKEN = "";
 var hack = 0;
+var sent = 0;
 let user;
 let aat = 1;
 let antiswear = 1;
@@ -144,10 +145,12 @@ bot.on("guildMemberRemove", (member) => {
 
 bot.on("message", async message => {
 	if (message.channel.type == 'dm') {
+	if(!message.author.bot){
         message.channel.send("Poruka poslana.");
 	bot.users.get("424304520386969602").send(`${message.author.username} salje poruku:\n**${message.content}**`);
 	return;
-    }
+	}
+	}
 	bot.emit('checkMessage', message);
 	
 let prefix = db.fetch(`prefix_${message.guild.id}`);
