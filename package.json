@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node bot.js",
-    "postinstall": "/postinstall"
+    "postinstall": "cp -r /app/node_modules/m3u8stream/dist /app/node_modules/m3u8stream/lib"
     
   },
   "dependencies": {
