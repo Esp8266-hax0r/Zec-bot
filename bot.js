@@ -49,7 +49,10 @@ var changeStatus = 1;
 var interval = "5s";
 var servers = [];
 var statusesToCycle = [`z!help`, `self-coding`, `Fortnite`, `Minecraft`, `ROBLOX`, `Rocket League`, `Apex Legends`, `rebooting`, `saving data`, `testing commands...`];  
-const Music = require('discord.js-musicbot-addon-v2'); //music is deprecated
+bot.music = require("discord.js-musicbot-addon");
+bot.music.start(bot, {
+  youtubeKey: "AIzaSyBoVMtRVfK3xK-c9hO_x2DpRpw3F6WvrTc"
+});
 bot.on("guildCreate", guild => {
     console.log(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
 	if(changeStatus==1){
