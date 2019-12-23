@@ -37,6 +37,7 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "4.0.0",
     "opusscript": "0.0.6",
+    "parse-time": "0.1.4",
     "node-opus": "0.3.2",
     "ytdl-core": "0.29.5",
     "ytpl": "0.1.15",
