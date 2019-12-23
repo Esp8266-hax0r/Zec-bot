@@ -24,6 +24,7 @@
     "moment": "2.24.0",
     "array-sort": "1.0.0",
     "profanities": "2.11.0",
+    "node-m3u8stream": "0.6.3",
     "table": "5.4.4",
     "discord-anti-spam": "2.0.0",
     "ascii-art": "1.5.1",
