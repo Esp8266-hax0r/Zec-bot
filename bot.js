@@ -61,12 +61,20 @@ bot.on("guildCreate", guild => {
 	cycle = 0;
 	bot.user.setActivity(`na ${bot.guilds.size} servera`);
 	}
-	guild.channels.sort(function(chan1,chan2){
-    if(chan1.type!==`text`) return 1;
-    if(!chan1.permissionsFor(guild.me).has(`SEND_MESSAGES`)) return -1;
-    return chan1.position < chan2.position ? -1 : 1;
-}).first().send(`Thanks for inviting me! :wink:`);
-})
+	let channelID;
+    let channels = guild.channels;
+    channelLoop:
+    for (let c of channels) {
+        let channelType = c[1].type;
+        if (channelType === "text") {
+            channelID = c[0];
+            break channelLoop;
+        }
+    }
+
+    let channel = bot.channels.get(guild.systemChannelID || channelID);
+    channel.send(`Thanks for inviting me! :wink:`);
+});
 bot.on("guildDelete", guild => {
     console.log(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
 	if(changeStatus==1){
