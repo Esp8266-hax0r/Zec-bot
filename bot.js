@@ -998,7 +998,7 @@ if(command === "dad"){
 	}
 	else{
 		dad = 0;
-		message.channel.send("Dad mode **disabled** :regional_indicator_x:);
+		message.channel.send("Dad mode **disabled** :regional_indicator_x:");
 	}
 }
 if (command === "consoletoggle"){
