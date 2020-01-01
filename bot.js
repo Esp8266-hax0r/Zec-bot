@@ -41,6 +41,7 @@ let cooldown = new Set();
 let cdseconds = 5000;
 let advertisersFrom = 0;
 let swearers = 0;
+let dad = 0;
 let swearersFrom = 0;
 let statusesChanges = 0;
 let statusesChangesFrom = 0;
@@ -206,7 +207,29 @@ setTimeout(() => {
 	}
 return;
 }
-  
+if(dad == 1){
+	let str = message.content;
+	let modified = str
+			.toLowerCase()
+			.replace(/i am/g, 'im')
+			.replace(/[^a-z\.\?\! ]/g, '')
+			.split(/\.|\?|\!/)
+			.map(i => {
+				i = ' ' + i
+				let start = i.indexOf(' im ')
+				if (start === -1) {
+					return
+				}
+				return i.substr(start)
+			})
+			.filter(i => i)
+			.join(' and ')
+
+		let start
+		if (modified) {
+			message.channel.send(`Hi ${modified.substr(start).split(' im ').map(i => i.trim()).filter(i => i).join(' ')}, I'm Dad!`);
+		}
+}
 let symbol = db.fetch(`symbol_${message.guild.id}`);
 	if(!symbol){
 		symbol = "$";
@@ -334,8 +357,7 @@ var iss_link = "http://api.open-notify.org/iss-now.json"
                 });
             })
             .catch(err => { throw err });
-}	
-	
+}		
 	
 if(command === "astronauts"){
  var astro_link = "http://api.open-notify.org/astros.json";
@@ -967,6 +989,17 @@ if (command === "cycletoggle"){
 	  message.channel.send("Status cycling **enabled** :white_check_mark:");
   }
 
+}
+if(command === "dad"){
+	if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
+	if(dad == 0){
+		dad = 1;
+		message.channel.send("Dad mode **enabled** :white_check_mark:");
+	}
+	else{
+		dad = 0;
+		message.channel.send("Dad mode **disabled** :regional_indicator_x:);
+	}
 }
 if (command === "consoletoggle"){
   if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
