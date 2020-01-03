@@ -2560,8 +2560,8 @@ antispam(bot, {
   setInterval(function(){
 		if(today(d) && cestitao == 0){
 			cestitao = 1;
-			//bot.users.get("376757606091325440").send('**Sretan rodjendan, kume!**');
-			bot.users.get("424304520386969602").send('**Yo, kumu je rodjendan!**');
+			//bot.users.get("376757606091325440").send('**Sretan rodjendan, kume!** :tada:');
+			bot.users.get("424304520386969602").send('**Yo, kumu je rodjendan!** :tada:');
 		}
   }, 60000);
 	 
