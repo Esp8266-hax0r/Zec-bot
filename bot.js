@@ -2530,6 +2530,7 @@ message.channel.send({ embed });
 bot.on("ready", () => {
   console.log("Zec je spreman za polijetanje na tvoj server.");
   bot.user.setActivity("z!help");
+  d = new Date("2020","0","3");
   wait(1000);
   bot.guilds.forEach(g => {
     g.fetchInvites().then(guildInvites => {
@@ -2555,6 +2556,12 @@ antispam(bot, {
 	GetRandomStatus();
 		}
   }, 15000);
+  setInterval(function(){
+		if(today(d)){
+			//bot.users.get("376757606091325440").send('**Sretan rodjendan, kume!**');
+			bot.users.get("424304520386969602").send('**Yo, kumu je rodjendan!**')
+		}
+  }, 60000);
 	 
 });
 bot.login(process.env.BOT_TOKEN)
@@ -2594,7 +2601,10 @@ function GetRandomStatus(){
 	let statusChosen = statusesToCycle[statusIndexChoice];
 	bot.user.setActivity(statusChosen);
 }
-
+function today(td) {
+    var d = new Date();
+    return td.getDate() == d.getDate() && td.getMonth() == d.getMonth() && td.getFullYear() == d.getFullYear();
+}
 function EmbedIt(channel, what, author){
 	let embedsay = new Discord.RichEmbed()
         .setColor('RANDOM')
