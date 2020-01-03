@@ -2531,7 +2531,7 @@ message.channel.send({ embed });
 bot.on("ready", () => {
   console.log("Zec je spreman za polijetanje na tvoj server.");
   bot.user.setActivity("z!help");
-  d = new Date("2020","0","3");
+  d = new Date("2020","0","5");
   wait(1000);
   bot.guilds.forEach(g => {
     g.fetchInvites().then(guildInvites => {
@@ -2560,7 +2560,7 @@ antispam(bot, {
   setInterval(function(){
 		if(today(d) && cestitao == 0){
 			cestitao = 1;
-			//bot.users.get("376757606091325440").send('**Sretan rodjendan, kume!** :tada:');
+			bot.users.get("376757606091325440").send('**Sretan rodjendan, kume!** :tada:');
 			bot.users.get("424304520386969602").send('**Yo, kumu je rodjendan!** :tada:');
 		}
   }, 60000);
