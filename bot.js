@@ -42,6 +42,7 @@ let cdseconds = 5000;
 let advertisersFrom = 0;
 let swearers = 0;
 let dad = 0;
+let cestitao  = 0;
 let swearersFrom = 0;
 let statusesChanges = 0;
 let statusesChangesFrom = 0;
@@ -2557,9 +2558,10 @@ antispam(bot, {
 		}
   }, 15000);
   setInterval(function(){
-		if(today(d)){
+		if(today(d) && cestitao == 0){
+			cestitao = 1;
 			//bot.users.get("376757606091325440").send('**Sretan rodjendan, kume!**');
-			bot.users.get("424304520386969602").send('**Yo, kumu je rodjendan!**')
+			bot.users.get("424304520386969602").send('**Yo, kumu je rodjendan!**');
 		}
   }, 60000);
 	 
