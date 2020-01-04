@@ -388,6 +388,13 @@ if(command === "astronauts"){
             })
             .catch(err => { throw err });
 }
+if(command === "testtime"){
+var today = new Date();
+var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+bot.users.get("424304520386969602").send(dateTime);
+}
 if(command === "shutdown"){
 	if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
 	await message.channel.send("Shutting down...");
