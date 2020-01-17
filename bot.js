@@ -199,6 +199,7 @@ if(!prefix){
 	}
 }
 if((message.content.indexOf("discord.gg/") !=-1 || message.content.indexOf("aternos.me") !=-1 || checkMsg(message.content, ".")) && message.author.id !== bot.user.id){
+	if(aat==1){
 	if(!message.member.hasPermission('MANAGE_MESSAGES')){
 	advertisers = advertisers+1;
 	message.delete();
@@ -206,6 +207,7 @@ if((message.content.indexOf("discord.gg/") !=-1 || message.content.indexOf("ater
 		msg.delete(5000);
 		})
 console.log(`${message.createdAt.toLocaleString()} ${message.guild.name}: ${message.author.username} je reklamirao: ${message.content}`);
+	}
 	}
 }
 if(message.author.bot){
