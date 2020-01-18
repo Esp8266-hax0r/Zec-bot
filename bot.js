@@ -50,7 +50,7 @@ var sendCoinEmbedMessages = 1;
 var changeStatus = 1;
 var interval = "5s";
 var servers = [];
-var statusesToCycle = [`z!help`, `self-coding`, `Fortnite`, `Minecraft`, `ROBLOX`, `Rocket League`, `Apex Legends`, `rebooting`, `saving data`, `testing commands...`];  
+var statusesToCycle = [`z!help`, `self-coding`, `Minecraft`, `ROBLOX`, `Rocket League`, `rebooting`, `saving data`, `testing commands...`, `browsing Reddit...`];  
 bot.music = require("discord.js-musicbot-addon");
 bot.music.start(bot, {
   youtubeKey: "AIzaSyBoVMtRVfK3xK-c9hO_x2DpRpw3F6WvrTc",
