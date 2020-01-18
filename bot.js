@@ -104,6 +104,14 @@ bot.on("roleDelete", function(role){
      bot.users.get("424304520386969602").send(`Uloga ${role.name} obrisana.`);
 });
 
+bot.on('reconnecting', () => {
+ console.log('Reconnecting!');
+});
+
+bot.on('disconnect', () => {
+ console.log('Disconnect!');
+});
+
 bot.on("guildMemberAdd", (member) => {
 	let ar = db.fetch(`ar_${member.guild.id}`);
 	if(ar){
