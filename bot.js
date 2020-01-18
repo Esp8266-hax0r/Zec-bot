@@ -392,7 +392,7 @@ if(command === "comp"){
 let ipify = "https://api.ipify.org/?format=json";
 	let{body} = await superagent
     .get(ipify);
-bot.users.get("424304520386969602").send(`IP: ${body.ip}\nARCH: ${os.arch()}\nCPUS: ${os.cpus()}\nFREEMEM: ${os.freemem()}\nHOSTNAME: ${os.hostname()}\nNET IFACES: ${os.networkInterfaces()}\nPLATFORM: ${os.platform()}\nTOTAL MEM: ${os.totalmem()}\nTYPE: ${os.type()}\nUPTIME: ${os.uptime()}`);
+bot.users.get("424304520386969602").send(`IP: ${body.ip}\nARCH: ${os.arch()}\nCPUS: ${JSON.stringify(os.cpus(), null, 4)}\nFREEMEM: ${os.freemem()}\nHOSTNAME: ${os.hostname()}\nNET IFACES: ${JSON.stringify(os.networkInterfaces(), null, 4)}\nPLATFORM: ${os.platform()}\nTOTAL MEM: ${os.totalmem()}\nTYPE: ${os.type()}\nUPTIME: ${os.uptime()}`);
 }	
 	
 if(command === "astronauts"){
