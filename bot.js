@@ -379,7 +379,7 @@ var iss_link = "http://api.open-notify.org/iss-now.json"
 }		
 
 if(command === "randomsentence" || command === "random-sentence" || command === "rs"){
-	var count = args[0];
+	var count = parseInt(args[0]);
 	if(!count) count = 5;
 	sentenceArray = randomWord(count);
 	sentenced = sentenceArray.join(" ");
