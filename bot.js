@@ -377,6 +377,15 @@ var iss_link = "http://api.open-notify.org/iss-now.json"
             })
             .catch(err => { throw err });
 }		
+
+if(command === "randomsentence" || command === "random-sentence" || command === "rs"){
+	var count = args[0];
+	if(!count) count = 5;
+	sentenceArray = randomWord(count);
+	sentenced = sentenceArray.join(" ");
+	message.channel.send(sentenced.capitalize() + ".");
+	
+}	
 	
 if(command === "astronauts"){
  var astro_link = "http://api.open-notify.org/astros.json";
@@ -2663,6 +2672,10 @@ function manageInvites(member){
 function reboot(){
  bot.destroy();
  bot.login(process.env.BOT_TOKEN);
+}
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 function shorten(text, maxLen = 2000) {
