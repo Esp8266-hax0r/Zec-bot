@@ -105,11 +105,11 @@ bot.on("roleDelete", function(role){
 });
 
 bot.on('reconnecting', () => {
- console.log('Reconnecting!');
+ bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot reconnecting.`);
 });
 
 bot.on('disconnect', () => {
- console.log('Disconnect!');
+ bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot disconnecting.`);
 });
 
 bot.on("guildMemberAdd", (member) => {
