@@ -310,11 +310,10 @@ else{
 }
 	
 if(command === "readqr"){
-	
+console.log(message.attachments.first().url);	
 try {
 			const { body } = await request1
-				.get('https://api.qrserver.com/v1/read-qr-code/?fileurl=')
-				.query(message.attachments.first().url);
+				.get('https://api.qrserver.com/v1/read-qr-code/?fileurl=' + message.attachments.first().url);
 			const data = body[0].symbol[0];
 			if (!data.data) return message.channel.send(`Ne mogu procitati QR code: ${data.error}.`);
 			return message.channel.send(shorten(data.data, 2000 - (msg.author.toString().length + 2)));
