@@ -2246,6 +2246,7 @@ if(command === "status") {
 });
 
 bot.on("message", function(message){
+	if(disabled == 1) return;
 	if(message.channel.type === "dm") return;
 	let prefix = db.fetch(`prefix_${message.guild.id}`);
 	if(!prefix){
