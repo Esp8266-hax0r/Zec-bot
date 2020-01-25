@@ -2251,6 +2251,7 @@ if(command === "status") {
   }
 else{
 	message.channel.send("Bot is currently disabled.");
+	return;
 }
 });
 
