@@ -40,6 +40,7 @@ var deleteMessages = 0;
 let advertisers = 0;
 let cooldown = new Set();
 let cdseconds = 5000;
+let sendmsg = 1;
 let advertisersFrom = 0;
 let swearers = 0;
 let disabled = 0;
@@ -59,8 +60,10 @@ bot.music.start(bot, {
   botPrefix: "z!"
 });
 bot.on("guildCreate", guild => {
-    console.log(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
-	if(changeStatus==1){
+    if (sendmsg == 1){
+    bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
+    }	
+    if(changeStatus==1){
 	cycle = 0;
 	bot.user.setActivity(`na ${bot.guilds.size} servera`);
 	}
@@ -79,39 +82,48 @@ bot.on("guildCreate", guild => {
     channel.send(`Thanks for inviting me! :wink:`);
 });
 bot.on("guildDelete", guild => {
-    console.log(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
-	if(changeStatus==1){
+   if(sendmsg == 1){
+    bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
+    }	
+    if(changeStatus==1){
 	cycle = 0;
 	bot.user.setActivity(`na ${bot.guilds.size} servera`);
 	}
 })
 
 bot.on("channelDelete", function(channel){
+    if (sendmsg == 0) return;
     bot.users.get("424304520386969602").send(`${channel.name} kanal obrisan!`);
 });
 
 bot.on("guildBanAdd", function(guild, user){
+     if (sendmsg == 0) return;
      bot.users.get("424304520386969602").send(`${user.username} je banovan sa servera ${guild.name}`);
 });
 
 bot.on("guildBanRemove", function(guild, user){
+     if (sendmsg == 0) return;
      bot.users.get("424304520386969602").send(`${user.username} je unbanovan sa servera ${guild.name}`);
 });
 
 bot.on("roleCreate", function(role){
+     if (sendmsg == 0) return;
      bot.users.get("424304520386969602").send(`Uloga ${role.name} stvorena.`);
 });
 
 bot.on("roleDelete", function(role){
+     if (sendmsg == 0) return;
      bot.users.get("424304520386969602").send(`Uloga ${role.name} obrisana.`);
 });
 
 bot.on('reconnecting', () => {
- bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot reconnecting.`);
+     if (sendmsg == 0) return;
+     bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot reconnecting.`);
 });
 
 bot.on('disconnect', () => {
- bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot disconnecting.`);
+     if (sendmsg == 0) return;
+     bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot disconnecting.`);
 });
 
 bot.on("guildMemberAdd", (member) => {
@@ -285,12 +297,24 @@ let symbol = db.fetch(`symbol_${message.guild.id}`);
 
 }
 	
+if(command === "sendtoggle"){
+if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
+if(sendmsg == 0){
+	sendmsg = 1;
+	message.channel.send("Sending messages enabled.");
+}
+else{
+	message.channel.send("Sending messages disabled.");
+	sendmsg = 0;
+}
+}
+	
 if(command === "readqr"){
-	var imgUrl = (message.attachments).array();
+	
 try {
 			const { body } = await request1
-				.get('https://api.qrserver.com/v1/read-qr-code/')
-				.query(imgUrl[0].url);
+				.get('https://api.qrserver.com/v1/read-qr-code/?fileurl=')
+				.query(message.attachments.first().url);
 			const data = body[0].symbol[0];
 			if (!data.data) return message.channel.send(`Ne mogu procitati QR code: ${data.error}.`);
 			return message.channel.send(shorten(data.data, 2000 - (msg.author.toString().length + 2)));
