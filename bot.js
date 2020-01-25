@@ -259,16 +259,11 @@ let symbol = db.fetch(`symbol_${message.guild.id}`);
   if(message.content.indexOf(prefix) !== 0) return;
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-  if(disabled == 0 || command === "undisable"){
-  if(disabled == 1 && command === "undisable" && message.author.id == "424304520386969602"){
-  disabled=0;
-  message.channel.send("Bot undisabled.");
-  return;
+  if(disabled == 1 && message.author.id == "424304520386969602" && command === "undisable"){
+  	message.channel.send("Bot undisabled.");
+	disabled = 0;
   }
-  else if (command === "undisable" && disabled == 0){
-	   message.channel.send("Bot is not disabled.");
-	  return;
-  }
+  if(disabled == 1) return message.channel.send("Bot is currently disabled.");
   if(command === "cc" || command === "purge") {
 	  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Ne. Zec to ne dopusta.");
     
@@ -2247,11 +2242,6 @@ if(command === "status") {
    .addField("Uptime", GetUptime(), true)
    .addField("Bot kreiran",bot.user.createdAt.toLocaleString(),true)
    message.channel.send(serverembed);
-}
-  }
-else{
-	message.channel.send("Bot is currently disabled.");
-	return;
 }
 });
 
