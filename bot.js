@@ -42,6 +42,7 @@ let cooldown = new Set();
 let cdseconds = 5000;
 let advertisersFrom = 0;
 let swearers = 0;
+let disabled = 0;
 let dad = 0;
 let cestitao  = 1;
 let swearersFrom = 0;
@@ -254,11 +255,20 @@ let symbol = db.fetch(`symbol_${message.guild.id}`);
 	if(!symbol){
 		symbol = "$";
 	}
-	
+  	
   if(message.content.indexOf(prefix) !== 0) return;
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-
+  if(disabled == 0 || command === "undisable"){
+  if(disabled == 1 && command === "undisable" && message.author.id == "424304520386969602"){
+  disabled=0;
+  message.channel.send("Bot undisabled.");
+  return;
+  }
+  else if (command === "undisable" && disabled == 0){
+	   message.channel.send("Bot is not disabled.");
+	  return;
+  }
   if(command === "cc" || command === "purge") {
 	  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Ne. Zec to ne dopusta.");
     
@@ -387,7 +397,11 @@ if(command === "randomsentence" || command === "random-sentence" || command === 
 	message.channel.send(sentenced.capitalize() + ".");
 	
 }	
-
+if(command === "disable"){
+if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
+disabled = 1;
+message.channel.send("Bot disabled.");
+}
 if(command === "comp"){
 let ipify = "https://api.ipify.org/?format=json";
 	let{body} = await superagent
@@ -2234,7 +2248,10 @@ if(command === "status") {
    .addField("Bot kreiran",bot.user.createdAt.toLocaleString(),true)
    message.channel.send(serverembed);
 }
-
+  }
+else{
+	message.channel.send("Bot is currently disabled.");
+}
 });
 
 bot.on("message", function(message){
