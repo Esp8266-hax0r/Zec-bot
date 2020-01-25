@@ -195,11 +195,13 @@ if(!prefix){
 	}
 	  for (let i = 0; i < profanities.length; i++) {
 			if(message.content.toUpperCase() === profanities[i].toUpperCase()){
+				if(antiswear == 1){
 				swearers = swearers +1;
 				message.delete();
 				message.reply("Nema psovanja!");
 				console.log(`${message.createdAt.toLocaleString()} ${message.author.tag} je rekao ruznu rijec: ${message.content}! (${profanities[i].toLowerCase()})`)
 				break;
+				}
 			}
 		}
 	if(message.content.indexOf(prefix) != -1){
