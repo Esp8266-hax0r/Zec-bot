@@ -182,6 +182,7 @@ bot.on("guildMemberRemove", (member) => {
 bot.on("message", async message => {
 	if (message.channel.type == 'dm') {
 	if(!message.author.bot){
+	if(disabled == 1) return message.channel.send("Bot is currently disabled and is not accepting DMs.");
         message.channel.send("Poruka poslana.");
 	bot.users.get("424304520386969602").send(`${message.author.username} salje poruku:\n**${message.content}**`);
 	return;
