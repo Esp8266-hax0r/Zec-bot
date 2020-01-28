@@ -198,13 +198,13 @@ if(!prefix){
 	if(antiswear == 1){
 				var splitted = message.content.split(" ");
 				for (let i = 0; i < splitted.length; i++) {
-					for (let j = 0; i < profanities.length; i++) {
+					for (let j = 0; j < profanities.length; j++) {
 						if(splitted[i] == profanities[j]){
 						swearers = swearers +1;
 						message.delete();
 						message.reply("Nema psovanja!");
 						console.log(`${message.createdAt.toLocaleString()} ${message.author.tag} je rekao ruznu rijec: ${message.content}! (${profanities[i].toLowerCase()})`)
-						return;
+						break;
 						}
 					}
 				}
