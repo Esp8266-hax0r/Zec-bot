@@ -194,17 +194,16 @@ let prefix = db.fetch(`prefix_${message.guild.id}`);
 if(!prefix){
 		prefix = "z!";
 	}
-	  for (let i = 0; i < profanities.length; i++) {
-			if(message.content.toUpperCase() === profanities[i].toUpperCase()){
-				if(antiswear == 1){
+	
+	if(hasBadWord(message.toLowerCase())){
+	if(antiswear == 1){
 				swearers = swearers +1;
 				message.delete();
 				message.reply("Nema psovanja!");
 				console.log(`${message.createdAt.toLocaleString()} ${message.author.tag} je rekao ruznu rijec: ${message.content}! (${profanities[i].toLowerCase()})`)
 				break;
 				}
-			}
-		}
+	}
 	if(message.content.indexOf(prefix) != -1){
 	if(cooldown.has(message.author.id)){
     message.delete();
@@ -2726,4 +2725,8 @@ String.prototype.capitalize = function() {
 
 function shorten(text, maxLen = 2000) {
 	return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
+}
+
+function hasBadWord(msg) {
+    return profanitites.some(word => msg.includes(word));
 }
