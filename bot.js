@@ -201,7 +201,7 @@ if(!prefix){
 				message.delete();
 				message.reply("Nema psovanja!");
 				console.log(`${message.createdAt.toLocaleString()} ${message.author.tag} je rekao ruznu rijec: ${message.content}! (${profanities[i].toLowerCase()})`)
-				break;
+				return;
 				}
 	}
 	if(message.content.indexOf(prefix) != -1){
