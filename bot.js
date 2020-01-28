@@ -450,6 +450,9 @@ if(command === "astronauts"){
             })
             .catch(err => { throw err });
 }
+if(command==="listroles"){
+message.guild.roles.forEach(role => console.log(role.name, role.id));
+}
 if(command === "testtime"){
 var today = new Date();
 var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
