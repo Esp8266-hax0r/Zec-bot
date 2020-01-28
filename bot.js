@@ -195,13 +195,18 @@ if(!prefix){
 		prefix = "z!";
 	}
 	
-	if(hasBadWord(message.content.toLowerCase())){
 	if(antiswear == 1){
-				swearers = swearers +1;
-				message.delete();
-				message.reply("Nema psovanja!");
-				console.log(`${message.createdAt.toLocaleString()} ${message.author.tag} je rekao ruznu rijec: ${message.content}! (${profanities[i].toLowerCase()})`)
-				return;
+				var splitted = message.content.split(" ");
+				for (let i = 0; i < splitted.length; i++) {
+					for (let j = 0; i < profanities.length; i++) {
+						if(splitted[i] == profanities[j]){
+						swearers = swearers +1;
+						message.delete();
+						message.reply("Nema psovanja!");
+						console.log(`${message.createdAt.toLocaleString()} ${message.author.tag} je rekao ruznu rijec: ${message.content}! (${profanities[i].toLowerCase()})`)
+						return;
+						}
+					}
 				}
 	}
 	if(message.content.indexOf(prefix) != -1){
@@ -2725,8 +2730,4 @@ String.prototype.capitalize = function() {
 
 function shorten(text, maxLen = 2000) {
 	return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
-}
-
-function hasBadWord(msg) {
-    return profanities.some(word => msg.includes(word));
 }
