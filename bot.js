@@ -195,7 +195,7 @@ if(!prefix){
 		prefix = "z!";
 	}
 	
-	if(hasBadWord(message.toLowerCase())){
+	if(hasBadWord(message.content.toLowerCase())){
 	if(antiswear == 1){
 				swearers = swearers +1;
 				message.delete();
