@@ -2728,5 +2728,5 @@ function shorten(text, maxLen = 2000) {
 }
 
 function hasBadWord(msg) {
-    return profanitites.some(word => msg.includes(word));
+    return profanities.some(word => msg.includes(word));
 }
