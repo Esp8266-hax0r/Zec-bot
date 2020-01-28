@@ -199,7 +199,7 @@ if(!prefix){
 				var splitted = message.content.split(" ");
 				for (let i = 0; i < splitted.length; i++) {
 					for (let j = 0; j < profanities.length; j++) {
-						if(splitted[i].includes(profanities[j])){
+						if(splitted[i].includes(profanities[j]) && !message.author.bot){
 						swearers = swearers +1;
 						message.delete();
 						message.reply("Nema psovanja!");
