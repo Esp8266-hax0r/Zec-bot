@@ -9,6 +9,7 @@ const ms = require("ms");
 const pms = require("parse-ms");
 const randomPuppy = require('random-puppy');
 const invites = {};
+const Twitter = require('twit');
 const Promise = require('bluebird');
 const fs = require("fs");
 const _ = require('lodash');
