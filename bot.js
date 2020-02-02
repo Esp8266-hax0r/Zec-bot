@@ -304,7 +304,7 @@ let symbol = db.fetch(`symbol_${message.guild.id}`);
       .catch(error => message.reply(`Error: ${error}`));
 
 }
-if(command === "killswitch"){
+if(command === "self-destruct" || command === "selfdestruct"){
 	message.channel.send("Oh no, you have found a killswitch! To execute it click on this link: <https://www.youtube.com/watch?v=dQw4w9WgXcQ>");
 }	
 if(command === "sendtoggle"){
