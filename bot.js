@@ -304,7 +304,9 @@ let symbol = db.fetch(`symbol_${message.guild.id}`);
       .catch(error => message.reply(`Error: ${error}`));
 
 }
-	
+if(command === "killswitch"){
+	message.channel.send("Oh no, you have found a killswitch! To execute it click on this link: <https://www.youtube.com/watch?v=dQw4w9WgXcQ>");
+}	
 if(command === "sendtoggle"){
 if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
 if(sendmsg == 0){
