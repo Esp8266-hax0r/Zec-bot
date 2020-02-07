@@ -54,6 +54,7 @@ var sendCoinEmbedMessages = 1;
 var changeStatus = 1;
 var interval = "5s";
 var servers = [];
+var queue = [];
 var statusesToCycle = [`z!help`, `self-coding`, `Minecraft`, `ROBLOX`, `Rocket League`, `rebooting`, `saving data`, `testing commands...`, `browsing Reddit...`];  
 bot.music = require("discord.js-musicbot-addon");
 bot.music.start(bot, {
@@ -63,7 +64,8 @@ bot.music.start(bot, {
 bot.on("guildCreate", guild => {
     if (sendmsg == 1){
     bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
-    }	
+    }
+    else queue.push(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
     if(changeStatus==1){
 	cycle = 0;
 	bot.user.setActivity(`na ${bot.guilds.size} servera`);
@@ -85,7 +87,8 @@ bot.on("guildCreate", guild => {
 bot.on("guildDelete", guild => {
    if(sendmsg == 1){
     bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
-    }	
+    }
+    else queue.push(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
     if(changeStatus==1){
 	cycle = 0;
 	bot.user.setActivity(`na ${bot.guilds.size} servera`);
@@ -93,37 +96,37 @@ bot.on("guildDelete", guild => {
 })
 
 bot.on("channelDelete", function(channel){
-    if (sendmsg == 0) return;
+    if (sendmsg == 0) return queue.push(`${channel.name} kanal obrisan!`);
     bot.users.get("424304520386969602").send(`${channel.name} kanal obrisan!`);
 });
 
 bot.on("guildBanAdd", function(guild, user){
-     if (sendmsg == 0) return;
+     if (sendmsg == 0) return queue.push(`${user.username} je banovan sa servera ${guild.name}`);
      bot.users.get("424304520386969602").send(`${user.username} je banovan sa servera ${guild.name}`);
 });
 
 bot.on("guildBanRemove", function(guild, user){
-     if (sendmsg == 0) return;
+     if (sendmsg == 0) return queue.push(`${user.username} je unbanovan sa servera ${guild.name}`);
      bot.users.get("424304520386969602").send(`${user.username} je unbanovan sa servera ${guild.name}`);
 });
 
 bot.on("roleCreate", function(role){
-     if (sendmsg == 0) return;
+     if (sendmsg == 0) return queue.push(`Uloga ${role.name} stvorena.`);
      bot.users.get("424304520386969602").send(`Uloga ${role.name} stvorena.`);
 });
 
 bot.on("roleDelete", function(role){
-     if (sendmsg == 0) return;
+     if (sendmsg == 0) return queue.push(`Uloga ${role.name} obrisana.`);
      bot.users.get("424304520386969602").send(`Uloga ${role.name} obrisana.`);
 });
 
 bot.on('reconnecting', () => {
-     if (sendmsg == 0) return;
+     if (sendmsg == 0) return queue.push(new Date().toLocaleString() + " " +`Bot reconnecting.`);
      bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot reconnecting.`);
 });
 
 bot.on('disconnect', () => {
-     if (sendmsg == 0) return;
+     if (sendmsg == 0) return queue.push(new Date().toLocaleString() + " " +`Bot disconnecting.`);
      bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot disconnecting.`);
 });
 
@@ -331,6 +334,18 @@ try {
 		}
 }
 
+if(command === "dropqueue"){
+for (item in queue){
+bot.users.get("424304520386969602").send(`${item}`);
+}
+queue = [];
+}	
+
+if(command === "addtoqueue"){
+queue.push(args.join(" "));
+message.channel.send(":white_check_mark:");
+}	
+	
 if(command==="minecraft"){
 	let text = args.join(" ").toString().replace(/ /g,"%20");
   let mcembed = new Discord.RichEmbed()
