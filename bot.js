@@ -335,8 +335,8 @@ try {
 }
 
 if(command === "dropqueue"){
-for (item in queue){
-bot.users.get("424304520386969602").send(`${item}`);
+for (let item in queue){
+bot.users.get("424304520386969602").send(item);
 }
 queue = [];
 }	
