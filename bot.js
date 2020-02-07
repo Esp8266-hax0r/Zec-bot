@@ -343,6 +343,8 @@ queue = [];
 
 if(command === "addtoqueue"){
 queue.push(args.join(" "));
+message.channel.send("Pushed " + args.join(" ") + "\nQueue: " + queue);
+
 message.channel.send(":white_check_mark:");
 }	
 	
