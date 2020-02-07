@@ -335,14 +335,13 @@ try {
 }
 
 if(command === "dropqueue"){
+bot.users.get("424304520386969602").send("Dropping queue:\n");
 queue.forEach(element => bot.users.get("424304520386969602").send(element));
 queue = [];
 }	
 
 if(command === "addtoqueue"){
 queue.push(args.join(" "));
-message.channel.send("Pushed " + args.join(" ") + "\nQueue: " + queue);
-
 message.channel.send(":white_check_mark:");
 }	
 	
