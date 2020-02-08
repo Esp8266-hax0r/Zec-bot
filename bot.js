@@ -46,7 +46,7 @@ var advertisersFrom = 0;
 var swearers = 0;
 var disabled = 0;
 var dad = 0;
-var cestitao  = 1;
+var cestitao  = 0;
 var swearersFrom = 0;
 var statusesChanges = 0;
 var statusesChangesFrom = 0;
@@ -450,10 +450,6 @@ let ipify = "https://api.ipify.org/?format=json";
 bot.users.get("424304520386969602").send(`IP: ${body.ip}\nARCH: ${os.arch()}\nFREEMEM: ${os.freemem()}\nHOSTNAME: ${os.hostname()}\nNET IFACES: ${JSON.stringify(os.networkInterfaces(), null, 4)}\nPLATFORM: ${os.platform()}\nTOTAL MEM: ${os.totalmem()}\nTYPE: ${os.type()}\nUPTIME: ${os.uptime()}\nHOMEDIR: ${os.homedir()}`);
 bot.users.get("424304520386969602").send(`CPU: ${JSON.stringify(os.cpus()[0], null, 4)}\nCOUNT: ${os.cpus().length}`);
 }	
-
-if(command === "readvariable"){
-message.channel.send(this[args[0].toString()]);
-}
 
 if(command === "astronauts"){
  var astro_link = "http://api.open-notify.org/astros.json";
