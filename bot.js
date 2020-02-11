@@ -2124,7 +2124,7 @@ let snekImage = sneks[urlIndex];
   .setColor("#7289DA")
   .setTitle(":snake:")
   .setImage(snekImage);
-  message.channel.send(žembed);
+  message.channel.send(snekembed);
 
 
 }
