@@ -2666,7 +2666,13 @@ message.channel.send({ embed });
 }})
 bot.on("ready", () => {
   console.log("Zec je spreman za polijetanje na tvoj server.");
-  if(sendmsg===1) return bot.users.get("424304520386969602").send('Bot ready.');
+  if(sendmsg===1){
+	  bot.users.get("424304520386969602").send('Bot ready.');
+  }
+  else{
+  	queue.push(new Date().toLocaleString() + " Bot ready.");
+	updateQueue();
+  }
   bot.user.setActivity("z!help");
   d = new Date("2020","1","9");
   wait(1000);
