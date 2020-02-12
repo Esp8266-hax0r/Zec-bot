@@ -2807,5 +2807,5 @@ db.set('queue',queue);
 }
 
 function dropVariables(){
-bot.users.get("424304520386969602").send('SendMsg: ' + sendmsg+"\nQueue: " + queue + "\nCestitao: " + cestitao);
+bot.users.get("424304520386969602").send('SendMsg: ' + sendmsg+ db.fetch('sendmsg') + "\nQueue: " + queue + db.fetch('queue')+ "\nCestitao: " + cestitao + db.fetch('cestitao'));
 }
