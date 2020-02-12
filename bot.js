@@ -41,12 +41,14 @@ var deleteMessages = 0;
 var advertisers = 0;
 var cooldown = new Set();
 var cdseconds = 5000;
-var sendmsg = 1;
+var sendmsg = await db.fetch('sendmsg');
+if (sendmsg === null) sendmsg = 1;
 var advertisersFrom = 0;
 var swearers = 0;
 var disabled = 0;
 var dad = 0;
-var cestitao  = 0;
+var cestitao  = await db.fetch(`cestitao`);
+if(cestitao === null) cestitao = 0;
 var swearersFrom = 0;
 var statusesChanges = 0;
 var statusesChangesFrom = 0;
@@ -313,10 +315,11 @@ if(command === "self-destruct" || command === "selfdestruct"){
 if(command === "sendtoggle"){
 if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
 if(sendmsg == 0){
-	sendmsg = 1;
+	db.set('sendmsg',1);
 	message.channel.send("Sending messages enabled.");
 }
 else{
+	db.set('sendmsg',0);
 	message.channel.send("Sending messages disabled.");
 	sendmsg = 0;
 }
@@ -2652,7 +2655,7 @@ antispam(bot, {
   }, 15000);
   setInterval(function(){
 		if(today(d) && cestitao == 0){
-			cestitao = 1;
+			db.set('cestitao', 1);
 			bot.users.get("424304520386969602").send('Happy Club Penguin 3rd anniversary! :tada:');
 		}
   }, 60000);
