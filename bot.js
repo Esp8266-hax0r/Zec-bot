@@ -379,7 +379,11 @@ bot.users.get("424304520386969602").send("Dropping queue:\n");
 queue.forEach(element => bot.users.get("424304520386969602").send(element));
 queue = [];
 updateQueue();
-}	
+}
+	
+if(command==="dropvariables"){
+dropVariables();
+}
 
 if(command === "addtoqueue"){
 queue.push(args.join(" "));
@@ -2800,4 +2804,8 @@ function shorten(text, maxLen = 2000) {
 
 function updateQueue(){
 db.set('queue',queue);
+}
+
+function dropVariables(){
+bot.users.get("424304520386969602").send('SendMsg: ' + sendmsg+"\nQueue: " + queue + "\nCestitao: " + cestitao);
 }
