@@ -359,7 +359,6 @@ else{
 	db.set('sendmsg',0);
 	sendmsg=0;
 	message.channel.send("Sending messages disabled.");
-	sendmsg = 0;
 }
 }
 	
