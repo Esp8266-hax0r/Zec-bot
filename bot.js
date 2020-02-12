@@ -57,6 +57,7 @@ var changeStatus = 1;
 var interval = "5s";
 var servers = [];
 var queue = db.fetch('queue');
+if (queue===null) queue=[];
 var statusesToCycle = [`z!help`, `self-coding`, `Minecraft`, `ROBLOX`, `Rocket League`, `rebooting`, `saving data`, `testing commands...`, `browsing Reddit...`];  
 bot.music = require("discord.js-musicbot-addon");
 bot.music.start(bot, {
@@ -67,7 +68,10 @@ bot.on("guildCreate", guild => {
     if (sendmsg == 1){
     bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
     }
-    else queue.push(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
+    else{
+	    queue.push(new Date().toLocaleString() + " " + "Novi server: " + guild.name + `, sada sam na ${bot.guilds.size} servera!`);
+	    updateQueue();
+    }
     if(changeStatus==1){
 	cycle = 0;
 	bot.user.setActivity(`na ${bot.guilds.size} servera`);
@@ -90,45 +94,77 @@ bot.on("guildDelete", guild => {
    if(sendmsg == 1){
     bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
     }
-    else queue.push(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
-    if(changeStatus==1){
+    else{
+	    queue.push(new Date().toLocaleString() + " " + "Napustio sam server: " + guild.name+ `, sada sam na ${bot.guilds.size} servera!`);
+    	    updateQueue();
+	    return;
+    }
+	    if(changeStatus==1){
 	cycle = 0;
 	bot.user.setActivity(`na ${bot.guilds.size} servera`);
 	}
 })
 
 bot.on("channelDelete", function(channel){
-    if (sendmsg == 0) return queue.push(`${channel.name} kanal obrisan!`);
+    if (sendmsg == 0) {
+	    queue.push(`${channel.name} kanal obrisan!`);
+	    updateQueue();
+	    return;
+    }
     bot.users.get("424304520386969602").send(`${channel.name} kanal obrisan!`);
 });
 
 bot.on("guildBanAdd", function(guild, user){
-     if (sendmsg == 0) return queue.push(`${user.username} je banovan sa servera ${guild.name}`);
+     if (sendmsg == 0) {
+	     queue.push(`${user.username} je banovan sa servera ${guild.name}`);
+	     updateQueue();
+	     return;
+     }
      bot.users.get("424304520386969602").send(`${user.username} je banovan sa servera ${guild.name}`);
 });
 
 bot.on("guildBanRemove", function(guild, user){
-     if (sendmsg == 0) return queue.push(`${user.username} je unbanovan sa servera ${guild.name}`);
+     if (sendmsg == 0) {
+	     queue.push(`${user.username} je unbanovan sa servera ${guild.name}`);
+	     updateQueue();
+	     return;
+     }
      bot.users.get("424304520386969602").send(`${user.username} je unbanovan sa servera ${guild.name}`);
 });
 
 bot.on("roleCreate", function(role){
-     if (sendmsg == 0) return queue.push(`Uloga ${role.name} stvorena.`);
+     if (sendmsg == 0){
+	     queue.push(`Uloga ${role.name} stvorena.`);
+	     updateQueue();
+	     return;
+     }
      bot.users.get("424304520386969602").send(`Uloga ${role.name} stvorena.`);
 });
 
 bot.on("roleDelete", function(role){
-     if (sendmsg == 0) return queue.push(`Uloga ${role.name} obrisana.`);
+     if (sendmsg == 0) {
+	     queue.push(`Uloga ${role.name} obrisana.`);
+	     updateQueue();
+	     return;
+     }
      bot.users.get("424304520386969602").send(`Uloga ${role.name} obrisana.`);
 });
 
 bot.on('reconnecting', () => {
-     if (sendmsg == 0) return queue.push(new Date().toLocaleString() + " " +`Bot reconnecting.`);
+     if (sendmsg == 0) {
+	     queue.push(new Date().toLocaleString() + " " +`Bot reconnecting.`);
+	     updateQueue();
+	     return;
+     }
      bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot reconnecting.`);
 });
 
 bot.on('disconnect', () => {
-     if (sendmsg == 0) return queue.push(new Date().toLocaleString() + " " +`Bot disconnecting.`);
+     if (sendmsg == 0) {
+	     queue.push(new Date().toLocaleString() + " " +`Bot disconnecting.`);
+	     updateQueue();
+	     return;
+     }
      bot.users.get("424304520386969602").send(new Date().toLocaleString() + " " +`Bot disconnecting.`);
 });
 
@@ -343,12 +379,12 @@ if(command === "dropqueue"){
 bot.users.get("424304520386969602").send("Dropping queue:\n");
 queue.forEach(element => bot.users.get("424304520386969602").send(element));
 queue = [];
-db.set('queue',queue);
+updateQueue();
 }	
 
 if(command === "addtoqueue"){
 queue.push(args.join(" "));
-db.set('queue',queue);
+updateQueue();
 message.channel.send(":white_check_mark:");
 }	
 	
@@ -2754,4 +2790,8 @@ String.prototype.capitalize = function() {
 
 function shorten(text, maxLen = 2000) {
 	return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
+}
+
+function updateQueue(){
+db.set('queue',queue);
 }
