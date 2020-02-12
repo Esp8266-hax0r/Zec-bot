@@ -56,7 +56,7 @@ var sendCoinEmbedMessages = 1;
 var changeStatus = 1;
 var interval = "5s";
 var servers = [];
-var queue = [];
+var queue = db.fetch('queue');
 var statusesToCycle = [`z!help`, `self-coding`, `Minecraft`, `ROBLOX`, `Rocket League`, `rebooting`, `saving data`, `testing commands...`, `browsing Reddit...`];  
 bot.music = require("discord.js-musicbot-addon");
 bot.music.start(bot, {
@@ -316,10 +316,12 @@ if(command === "sendtoggle"){
 if(!message.author.id == "424304520386969602") return message.channel.send("Ne. Zec to ne dopusta.");
 if(sendmsg == 0){
 	db.set('sendmsg',1);
+	sendmsg=1;
 	message.channel.send("Sending messages enabled.");
 }
 else{
 	db.set('sendmsg',0);
+	sendmsg=0;
 	message.channel.send("Sending messages disabled.");
 	sendmsg = 0;
 }
@@ -341,10 +343,12 @@ if(command === "dropqueue"){
 bot.users.get("424304520386969602").send("Dropping queue:\n");
 queue.forEach(element => bot.users.get("424304520386969602").send(element));
 queue = [];
+db.set('queue',queue);
 }	
 
 if(command === "addtoqueue"){
 queue.push(args.join(" "));
+db.set('queue',queue);
 message.channel.send(":white_check_mark:");
 }	
 	
@@ -2656,6 +2660,7 @@ antispam(bot, {
   setInterval(function(){
 		if(today(d) && cestitao == 0){
 			db.set('cestitao', 1);
+			cestitao=1;
 			bot.users.get("424304520386969602").send('Happy Club Penguin 3rd anniversary! :tada:');
 		}
   }, 60000);
