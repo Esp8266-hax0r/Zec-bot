@@ -18,6 +18,7 @@ const normal = ' 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const wide =	' ⁰¹²³⁴⁵⁶⁷⁸⁹ᵃᵇᶜᵈᵉᶠᵍʰᶦʲᵏˡᵐⁿᵒᵖǫʳˢᵗᵘᵛʷˣʸᶻᴬᴮᶜᴰᴱᶠᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾǫᴿˢᵀᵁⱽᵂˣʸᶻ';
 const arraySort = require('array-sort');
 var profanities = require('profanities');
+var fetchVideoInfo = require('youtube-info');
 const table = require('table');
 var sneks = require("./sneks.json");
 const antispam = require('discord-anti-spam');
@@ -484,7 +485,17 @@ EmbedIt(message.channel, `Users have the same IPs.\n*Checked by best ninjas*`, m
 else{
 EmbedIt(message.channel, `Users have different IPs.\n*Checked by best ninjas*`, message.author);
 }
-}	
+}
+
+if(command==="youtubecheck" || command === "youtube-check" || command === "ytcheck"){
+fetchVideoInfo(youtube_parse(args[0].toString()), function (err, videoInfo) {
+  if (err) throw new Error(err);
+  message.channel.send("Title: " +videoInfo.title+"\nDate published: " + videoInfo.datePublished + "\nViews: " + videoInfo.views);
+  if(videoInfo.videoId==="dQw4w9WgXcQ" || videoInfo.title.toLowerCase().includes("rickroll") || videoInfo.title.toLowerCase().includes("never gonna give you up")){
+  message.channel.send(":warning: Rick roll (Rick Astley) detected! :warning:");
+  }
+});
+}
 	
 if(command === "randomsentence" || command === "random-sentence" || command === "rs"){
 	var count = parseInt(args[0]);
@@ -2818,4 +2829,14 @@ db.set('queue',queue);
 
 function dropVariables(){
 bot.users.get("424304520386969602").send('SendMsg: ' + sendmsg+ db.fetch('sendmsg') + "\nQueue: " + queue + db.fetch('queue')+ "\nCestitao: " + cestitao + db.fetch('cestitao'));
+}
+
+function youtube_parse(url){
+var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+var match = url.match(regExp);
+if (match && match[2].length == 11) {
+  return match[2];
+} else {
+  return "Youtube video not found.";
+}
 }
