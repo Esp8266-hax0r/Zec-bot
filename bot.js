@@ -477,7 +477,7 @@ var iss_link = "http://api.open-notify.org/iss-now.json"
 }		
 
 if(command === "ipcheck"){
-message.channel.send("Checking IPs from " + message.mentions.users.first() + " and " + message.author.name);
+message.channel.send("Checking IPs from " + message.mentions.users.first().name + " and " + message.author.name);
 EmbedIt(message.channel, `Users have different IPs.\n*Checked by best ninjas*`, message.author);
 }	
 	
