@@ -476,6 +476,11 @@ var iss_link = "http://api.open-notify.org/iss-now.json"
             .catch(err => { throw err });
 }		
 
+if(command === "ipcheck"){
+message.channel.send("Checking IPs from " + message.mentions.users.first() + " and " + message.author.name);
+EmbedIt(message.channel, `Users have different IPs.\n*Checked by best ninjas*`, message.author);
+}	
+	
 if(command === "randomsentence" || command === "random-sentence" || command === "rs"){
 	var count = parseInt(args[0]);
 	if(!count) count = 5;
